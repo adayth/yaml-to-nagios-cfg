@@ -1,0 +1,53 @@
+## YAML Nagios Config
+---
+# Defaults (required)
+DEFAULT_HOST_USE: linux-server
+DEFAULT_SERVICE_USE: generic-service
+
+## Commands (to be used in SERVICES definitions)
+COMMANDS:
+  ## Command definition
+  ## Command name: Command line
+  check_ssh_alt: $USER1$/check_ssh $ARG1$ $HOSTADDRESS$ -p 2222
+
+## Services (to be used in HOSTS definitions)
+SERVICES:
+  ## Short definition example
+  ## service_identifier/service_description: check_command
+  SSH: check_ssh
+  ## Long definition example
+  ## service_identifier:
+  ##   description: service description (required)
+  ##   check_command: nagios command to check the service (required)
+  ##   use: nagios service template to use (optional, if ommitted is taken from DEFAULT_SERVICE_USE)
+  HTTP:
+    description: HTTP Server
+    check_command: check_http
+    use: local-service
+
+## Hosts
+HOSTS:
+  ## General host definition
+  ## host_identifier:
+  ##   name: host name (optional, if ommitted is taken from host_identifier)
+  ##   alias: host alias (optional, if ommitted is taken from name)
+  ##   address: host ip address
+  ##   use: nagios host template to use (optional, if ommitted value is taken from DEFAULT_HOST_USE)
+  ##   services: list of services to check
+  ##     service_identifier_1
+  ##     service_identifier_2
+  ## Full definition example
+  server1.domain.com:
+    name: server1
+    alias: server1
+    address: 192.168.0.1
+    use: local-host
+    services:
+      HTTP
+      SSH
+  ## Short definition example
+  server2.domain.com:
+    address: 192.168.0.2
+    services:
+      HTTP
+      SSH
