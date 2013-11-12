@@ -76,10 +76,10 @@ template (use directive).
 # Usage
 #######
 
-Go to script directory in a console and run: php nagios-config.php FILE.yml
+Go to script directory in a console and run: php nagios-yml.php FILE.yml
 Where FILE:yml is the YML config file that you created.
 
 The script will output Nagios configuration file format to standard output, so if you want to create a file just do a redirection
-with: php nagios-config.php FILE.yml > generated.cfg
+with: php nagios-yml.php FILE.yml > generated.cfg
 
 Then you should load that file in your nagios.cfg file.
